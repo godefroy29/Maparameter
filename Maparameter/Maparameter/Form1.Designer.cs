@@ -33,11 +33,11 @@
             this.NudBlockSize = new System.Windows.Forms.NumericUpDown();
             this.PbPic = new System.Windows.Forms.PictureBox();
             this.txtPath = new System.Windows.Forms.TextBox();
-            this.BtnSaveLevel = new System.Windows.Forms.Button();
-            this.RtbLevel = new System.Windows.Forms.RichTextBox();
             this.BtnWrite = new System.Windows.Forms.Button();
             this.BtnReset = new System.Windows.Forms.Button();
-            this.BtnRedraw = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NudBlockSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbPic)).BeginInit();
             this.SuspendLayout();
@@ -71,9 +71,9 @@
             // PbPic
             // 
             this.PbPic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbPic.Location = new System.Drawing.Point(133, 38);
+            this.PbPic.Location = new System.Drawing.Point(12, 73);
             this.PbPic.Name = "PbPic";
-            this.PbPic.Size = new System.Drawing.Size(912, 523);
+            this.PbPic.Size = new System.Drawing.Size(1033, 488);
             this.PbPic.TabIndex = 2;
             this.PbPic.TabStop = false;
             this.PbPic.Click += new System.EventHandler(this.PbPic_Click);
@@ -85,27 +85,9 @@
             this.txtPath.Size = new System.Drawing.Size(205, 20);
             this.txtPath.TabIndex = 4;
             // 
-            // BtnSaveLevel
-            // 
-            this.BtnSaveLevel.Location = new System.Drawing.Point(365, 10);
-            this.BtnSaveLevel.Name = "BtnSaveLevel";
-            this.BtnSaveLevel.Size = new System.Drawing.Size(75, 23);
-            this.BtnSaveLevel.TabIndex = 5;
-            this.BtnSaveLevel.Text = "Save";
-            this.BtnSaveLevel.UseVisualStyleBackColor = true;
-            this.BtnSaveLevel.Click += new System.EventHandler(this.BtnSaveLevel_Click);
-            // 
-            // RtbLevel
-            // 
-            this.RtbLevel.Location = new System.Drawing.Point(12, 38);
-            this.RtbLevel.Name = "RtbLevel";
-            this.RtbLevel.Size = new System.Drawing.Size(105, 494);
-            this.RtbLevel.TabIndex = 6;
-            this.RtbLevel.Text = "";
-            // 
             // BtnWrite
             // 
-            this.BtnWrite.Location = new System.Drawing.Point(446, 10);
+            this.BtnWrite.Location = new System.Drawing.Point(365, 10);
             this.BtnWrite.Name = "BtnWrite";
             this.BtnWrite.Size = new System.Drawing.Size(75, 23);
             this.BtnWrite.TabIndex = 7;
@@ -115,7 +97,7 @@
             // 
             // BtnReset
             // 
-            this.BtnReset.Location = new System.Drawing.Point(651, 8);
+            this.BtnReset.Location = new System.Drawing.Point(565, 10);
             this.BtnReset.Name = "BtnReset";
             this.BtnReset.Size = new System.Drawing.Size(75, 23);
             this.BtnReset.TabIndex = 8;
@@ -123,15 +105,32 @@
             this.BtnReset.UseVisualStyleBackColor = true;
             this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
-            // BtnRedraw
+            // label1
             // 
-            this.BtnRedraw.Location = new System.Drawing.Point(12, 538);
-            this.BtnRedraw.Name = "BtnRedraw";
-            this.BtnRedraw.Size = new System.Drawing.Size(105, 23);
-            this.BtnRedraw.TabIndex = 9;
-            this.BtnRedraw.Text = "ReDraw";
-            this.BtnRedraw.UseVisualStyleBackColor = true;
-            this.BtnRedraw.Click += new System.EventHandler(this.BtnRedraw_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Ctrl + LeftClick => Event";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(205, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "LeftClick => Level";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(362, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(119, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "RightClick => StartPoint";
             // 
             // Form1
             // 
@@ -139,11 +138,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1057, 573);
-            this.Controls.Add(this.BtnRedraw);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnReset);
             this.Controls.Add(this.BtnWrite);
-            this.Controls.Add(this.RtbLevel);
-            this.Controls.Add(this.BtnSaveLevel);
             this.Controls.Add(this.txtPath);
             this.Controls.Add(this.PbPic);
             this.Controls.Add(this.NudBlockSize);
@@ -164,11 +163,11 @@
         private System.Windows.Forms.NumericUpDown NudBlockSize;
         private System.Windows.Forms.PictureBox PbPic;
         private System.Windows.Forms.TextBox txtPath;
-        private System.Windows.Forms.Button BtnSaveLevel;
-        private System.Windows.Forms.RichTextBox RtbLevel;
         private System.Windows.Forms.Button BtnWrite;
         private System.Windows.Forms.Button BtnReset;
-        private System.Windows.Forms.Button BtnRedraw;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

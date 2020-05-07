@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
+using Microsoft.VisualBasic;
 
 namespace Maparameter
 {
@@ -18,6 +16,7 @@ namespace Maparameter
         Bitmap DrawArea;
         Graphics g;
 
+        Dictionary<Point, String> lE;
         List<Point> lP0;
         List<Point> lP1;
         List<Point> lP2;
@@ -31,6 +30,7 @@ namespace Maparameter
             lP0 = new List<Point>();
             lP1 = new List<Point>();
             lP2 = new List<Point>();
+            lE = new Dictionary<Point, string>();
         }
 
         private void btnOpenPic_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace Maparameter
 
         private void PbPic_DoubleClick(object sender, EventArgs e)
         {
-            MouseEventArgs me = (MouseEventArgs)e;
+            System.Windows.Forms.MouseEventArgs me = (System.Windows.Forms.MouseEventArgs)e;
             switch (me.Button)
             {
                 case MouseButtons.Left:
@@ -76,38 +76,75 @@ namespace Maparameter
 
         private void PbPic_Click(object sender, EventArgs e)
         {
-            MouseEventArgs me = (MouseEventArgs)e;
-            switch (me.Button)
+            System.Windows.Forms.MouseEventArgs me = (System.Windows.Forms.MouseEventArgs)e;
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) | Keyboard.IsKeyDown(Key.RightCtrl))
             {
-                case MouseButtons.Left:
-                    Zonage(me);
-                    break;
-                case MouseButtons.None:
-                    break;
-                case MouseButtons.Right:
-                    StartZone(me);
-                    break;
-                case MouseButtons.Middle:
-                    break;
-                case MouseButtons.XButton1:
-                    break;
-                case MouseButtons.XButton2:
-                    break;
-                default:
-                    break;
+                ZoneEvent(me);
             }
+            else
+            {
+                switch (me.Button)
+                {
+                    case MouseButtons.Left:
+                        Zonage(me);
+                        break;
+                    case MouseButtons.None:
+                        break;
+                    case MouseButtons.Right:
+                        StartZone(me);
+                        break;
+                    case MouseButtons.Middle:
+                        break;
+                    case MouseButtons.XButton1:
+                        break;
+                    case MouseButtons.XButton2:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
         }
 
-        private void StartZone(MouseEventArgs me)
+        private void ZoneEvent(System.Windows.Forms.MouseEventArgs me)
         {
             Point coordinates = me.Location;
             int xVal = (int)(coordinates.X / NudBlockSize.Value);
             int yVal = (int)(coordinates.Y / NudBlockSize.Value);
             int blockSize = (int)NudBlockSize.Value;
             Point p = new Point(xVal, yVal);
-            Pen mypen = new Pen(Color.Green); ;
+            Pen mypen = new Pen(Color.Orange,2f);
+            bool alreadyExist = false;
+
+            g = Graphics.FromImage(DrawArea);
 
 
+            string plop;
+            alreadyExist = lE.TryGetValue(p, out plop);
+
+
+            string res = Interaction.InputBox("Nom de l'event :", "Nouvel Evenement", alreadyExist?plop:"").Trim(' ');
+            if (res != "")
+            {
+                lE.Add(new Point(xVal, yVal), res);
+                g.DrawLine(mypen, xVal * blockSize, yVal * blockSize, xVal * blockSize + blockSize, yVal * blockSize + blockSize);
+                g.DrawLine(mypen, xVal * blockSize + blockSize, yVal * blockSize, xVal * blockSize, yVal * blockSize + blockSize);
+                PbPic.Image = DrawArea;
+            }
+
+            g.Dispose();
+        }
+
+        private void StartZone(System.Windows.Forms.MouseEventArgs me)
+        {
+            Point coordinates = me.Location;
+            int xVal = (int)(coordinates.X / NudBlockSize.Value);
+            int yVal = (int)(coordinates.Y / NudBlockSize.Value);
+            int blockSize = (int)NudBlockSize.Value;
+            Point p = new Point(xVal, yVal);
+            Pen mypen = new Pen(Color.Green, 2f);
+
+           
             g = Graphics.FromImage(DrawArea);
 
             
@@ -118,14 +155,14 @@ namespace Maparameter
             g.Dispose();
         }
 
-        private void Zonage(MouseEventArgs me)
+        private void Zonage(System.Windows.Forms.MouseEventArgs me)
         {
             Point coordinates = me.Location;
             int xVal = (int)(coordinates.X / NudBlockSize.Value);
             int yVal = (int)(coordinates.Y / NudBlockSize.Value);
             int blockSize = (int)NudBlockSize.Value;
             Point p = new Point(xVal, yVal);
-            Pen mypen = new Pen(Color.Black); ;
+            Pen mypen = new Pen(Color.Black, 2f); ;
 
             int z0 = lP0.Contains(p) ? 1 : 0;
             int z1 = lP1.Contains(p) ? 2 : 0;
@@ -135,26 +172,26 @@ namespace Maparameter
             {
                 case 0:
                     lP1.Add(p);
-                    mypen = new Pen(Color.Red);
+                    mypen = new Pen(Color.Red, 2f);
                     break;
 
                 case 1:
                     lP0.Remove(p);
                     lP1.Add(p);
-                    mypen = new Pen(Color.Red);
+                    mypen = new Pen(Color.Red, 2f);
                     break;
 
                 case 2:
                     lP1.Remove(p);
                     lP2.Add(p);
-                    mypen = new Pen(Color.Yellow);
+                    mypen = new Pen(Color.Yellow, 2f);
                     break;
 
 
                 case 4:
                     lP2.Remove(p);
                     lP0.Add(p);
-                    mypen = new Pen(Color.Black);
+                    mypen = new Pen(Color.Black, 2f);
                     break;
 
                 default:
@@ -172,35 +209,56 @@ namespace Maparameter
             g.Dispose();
         }
 
-        private void BtnSaveLevel_Click(object sender, EventArgs e)
-        {
-            RtbLevel.ResetText();
-            RtbLevel.Text = "Level;X;Y";
-            RtbLevel.AppendText(Environment.NewLine + "-1;" + sp.X.ToString() + ";" + sp.Y.ToString());
-            foreach (Point p in lP0)
-            {
-                RtbLevel.AppendText(Environment.NewLine + "0;" + p.X.ToString() + ";" + p.Y.ToString());
-            }
-            foreach (Point p in lP1)
-            {
-                RtbLevel.AppendText(Environment.NewLine + "1;" + p.X.ToString() + ";" + p.Y.ToString());
-            }
-            foreach (Point p in lP2)
-            {
-                RtbLevel.AppendText(Environment.NewLine + "2;" + p.X.ToString() + ";" + p.Y.ToString());
-            }
-
-        }
+        
 
         private void BtnWrite_Click(object sender, EventArgs e)
         {
-            string picCsv = filePath.Substring(0, filePath.Length - filePath.Split('.').Last().Length - 1) + ".csv";
-            File.WriteAllLines(picCsv, RtbLevel.Lines);
+            WriteLevels();
+            WriteEvents();
+        }
+
+        private void WriteLevels()
+        {
+            string picCsvLevels = filePath.Substring(0, filePath.Length - filePath.Split('.').Last().Length - 1) + "_levels.csv";
+            List<string> levelsData = new List<string>
+            {
+                "Level;X;Y",
+                "-1;" + sp.X.ToString() + ";" + sp.Y.ToString()
+            };
+            foreach (Point p in lP0)
+            {
+                levelsData.Add("0;" + p.X.ToString() + ";" + p.Y.ToString());
+            }
+            foreach (Point p in lP1)
+            {
+                levelsData.Add("1;" + p.X.ToString() + ";" + p.Y.ToString());
+            }
+            foreach (Point p in lP2)
+            {
+                levelsData.Add("2;" + p.X.ToString() + ";" + p.Y.ToString());
+            }
+            File.WriteAllLines(picCsvLevels, levelsData);
+        }
+
+        private void WriteEvents()
+        {
+            string picCsvEventss = filePath.Substring(0, filePath.Length - filePath.Split('.').Last().Length - 1) + "_events.csv";
+            List<string> eventsData = new List<string>
+            {
+                "Name;X;Y",
+            };
+            foreach (Point p in lE.Keys)
+            {
+                eventsData.Add(lE[p] + ";" + p.X.ToString() + ";" + p.Y.ToString());
+            }
+            File.WriteAllLines(picCsvEventss, eventsData);
 
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
+            sp = new Point();
+            lE = new Dictionary<Point, string>();
             lP0 = new List<Point>();
             lP1 = new List<Point>();
             lP2 = new List<Point>();
