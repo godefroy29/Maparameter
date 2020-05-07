@@ -21,6 +21,7 @@ namespace Maparameter
         List<Point> lP0;
         List<Point> lP1;
         List<Point> lP2;
+        Point sp;
 
         string filePath;
 
@@ -52,16 +53,72 @@ namespace Maparameter
         private void PbPic_DoubleClick(object sender, EventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            zonage(me);
+            switch (me.Button)
+            {
+                case MouseButtons.Left:
+                    Zonage(me);
+                    break;
+                case MouseButtons.None:
+                    break;
+                case MouseButtons.Right:
+                    StartZone(me);
+                    break;
+                case MouseButtons.Middle:
+                    break;
+                case MouseButtons.XButton1:
+                    break;
+                case MouseButtons.XButton2:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void PbPic_Click(object sender, EventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            zonage(me);
+            switch (me.Button)
+            {
+                case MouseButtons.Left:
+                    Zonage(me);
+                    break;
+                case MouseButtons.None:
+                    break;
+                case MouseButtons.Right:
+                    StartZone(me);
+                    break;
+                case MouseButtons.Middle:
+                    break;
+                case MouseButtons.XButton1:
+                    break;
+                case MouseButtons.XButton2:
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void zonage(MouseEventArgs me)
+        private void StartZone(MouseEventArgs me)
+        {
+            Point coordinates = me.Location;
+            int xVal = (int)(coordinates.X / NudBlockSize.Value);
+            int yVal = (int)(coordinates.Y / NudBlockSize.Value);
+            int blockSize = (int)NudBlockSize.Value;
+            Point p = new Point(xVal, yVal);
+            Pen mypen = new Pen(Color.Green); ;
+
+
+            g = Graphics.FromImage(DrawArea);
+
+            
+            g.DrawEllipse(mypen, xVal * blockSize, yVal * blockSize, blockSize, blockSize);
+            sp = new Point(xVal , yVal );
+            PbPic.Image = DrawArea;
+
+            g.Dispose();
+        }
+
+        private void Zonage(MouseEventArgs me)
         {
             Point coordinates = me.Location;
             int xVal = (int)(coordinates.X / NudBlockSize.Value);
@@ -119,6 +176,7 @@ namespace Maparameter
         {
             RtbLevel.ResetText();
             RtbLevel.Text = "Level;X;Y";
+            RtbLevel.AppendText(Environment.NewLine + "-1;" + sp.X.ToString() + ";" + sp.Y.ToString());
             foreach (Point p in lP0)
             {
                 RtbLevel.AppendText(Environment.NewLine + "0;" + p.X.ToString() + ";" + p.Y.ToString());
@@ -138,6 +196,21 @@ namespace Maparameter
         {
             string picCsv = filePath.Substring(0, filePath.Length - filePath.Split('.').Last().Length - 1) + ".csv";
             File.WriteAllLines(picCsv, RtbLevel.Lines);
+
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            lP0 = new List<Point>();
+            lP1 = new List<Point>();
+            lP2 = new List<Point>();
+            DrawArea = new Bitmap(pic.Size.Width, pic.Size.Height);
+            PbPic.Image = DrawArea;
+        }
+
+        private void BtnRedraw_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

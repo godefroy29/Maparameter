@@ -36,6 +36,8 @@
             this.BtnSaveLevel = new System.Windows.Forms.Button();
             this.RtbLevel = new System.Windows.Forms.RichTextBox();
             this.BtnWrite = new System.Windows.Forms.Button();
+            this.BtnReset = new System.Windows.Forms.Button();
+            this.BtnRedraw = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NudBlockSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbPic)).BeginInit();
             this.SuspendLayout();
@@ -97,7 +99,7 @@
             // 
             this.RtbLevel.Location = new System.Drawing.Point(12, 38);
             this.RtbLevel.Name = "RtbLevel";
-            this.RtbLevel.Size = new System.Drawing.Size(105, 523);
+            this.RtbLevel.Size = new System.Drawing.Size(105, 494);
             this.RtbLevel.TabIndex = 6;
             this.RtbLevel.Text = "";
             // 
@@ -111,12 +113,34 @@
             this.BtnWrite.UseVisualStyleBackColor = true;
             this.BtnWrite.Click += new System.EventHandler(this.BtnWrite_Click);
             // 
+            // BtnReset
+            // 
+            this.BtnReset.Location = new System.Drawing.Point(651, 8);
+            this.BtnReset.Name = "BtnReset";
+            this.BtnReset.Size = new System.Drawing.Size(75, 23);
+            this.BtnReset.TabIndex = 8;
+            this.BtnReset.Text = "Reset";
+            this.BtnReset.UseVisualStyleBackColor = true;
+            this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
+            // 
+            // BtnRedraw
+            // 
+            this.BtnRedraw.Location = new System.Drawing.Point(12, 538);
+            this.BtnRedraw.Name = "BtnRedraw";
+            this.BtnRedraw.Size = new System.Drawing.Size(105, 23);
+            this.BtnRedraw.TabIndex = 9;
+            this.BtnRedraw.Text = "ReDraw";
+            this.BtnRedraw.UseVisualStyleBackColor = true;
+            this.BtnRedraw.Click += new System.EventHandler(this.BtnRedraw_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1057, 573);
+            this.Controls.Add(this.BtnRedraw);
+            this.Controls.Add(this.BtnReset);
             this.Controls.Add(this.BtnWrite);
             this.Controls.Add(this.RtbLevel);
             this.Controls.Add(this.BtnSaveLevel);
@@ -143,6 +167,8 @@
         private System.Windows.Forms.Button BtnSaveLevel;
         private System.Windows.Forms.RichTextBox RtbLevel;
         private System.Windows.Forms.Button BtnWrite;
+        private System.Windows.Forms.Button BtnReset;
+        private System.Windows.Forms.Button BtnRedraw;
     }
 }
 
