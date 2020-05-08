@@ -33,11 +33,11 @@
             this.NudBlockSize = new System.Windows.Forms.NumericUpDown();
             this.PbPic = new System.Windows.Forms.PictureBox();
             this.txtPath = new System.Windows.Forms.TextBox();
-            this.BtnWrite = new System.Windows.Forms.Button();
+            this.BtnWriteLevels = new System.Windows.Forms.Button();
             this.BtnReset = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.BtnSpecial = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NudBlockSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbPic)).BeginInit();
             this.SuspendLayout();
@@ -85,19 +85,19 @@
             this.txtPath.Size = new System.Drawing.Size(205, 20);
             this.txtPath.TabIndex = 4;
             // 
-            // BtnWrite
+            // BtnWriteLevels
             // 
-            this.BtnWrite.Location = new System.Drawing.Point(365, 10);
-            this.BtnWrite.Name = "BtnWrite";
-            this.BtnWrite.Size = new System.Drawing.Size(75, 23);
-            this.BtnWrite.TabIndex = 7;
-            this.BtnWrite.Text = "Write";
-            this.BtnWrite.UseVisualStyleBackColor = true;
-            this.BtnWrite.Click += new System.EventHandler(this.BtnWrite_Click);
+            this.BtnWriteLevels.Location = new System.Drawing.Point(365, 9);
+            this.BtnWriteLevels.Name = "BtnWriteLevels";
+            this.BtnWriteLevels.Size = new System.Drawing.Size(84, 23);
+            this.BtnWriteLevels.TabIndex = 7;
+            this.BtnWriteLevels.Text = "Write Level";
+            this.BtnWriteLevels.UseVisualStyleBackColor = true;
+            this.BtnWriteLevels.Click += new System.EventHandler(this.BtnWrite_Click);
             // 
             // BtnReset
             // 
-            this.BtnReset.Location = new System.Drawing.Point(565, 10);
+            this.BtnReset.Location = new System.Drawing.Point(365, 47);
             this.BtnReset.Name = "BtnReset";
             this.BtnReset.Size = new System.Drawing.Size(75, 23);
             this.BtnReset.TabIndex = 8;
@@ -108,29 +108,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 57);
+            this.label1.Location = new System.Drawing.Point(152, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 13);
+            this.label1.Size = new System.Drawing.Size(158, 13);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Ctrl + LeftClick => Event";
+            this.label1.Text = "Ctrl + LeftClick => Special Block";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(205, 57);
+            this.label2.Location = new System.Drawing.Point(12, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.Size = new System.Drawing.Size(122, 13);
             this.label2.TabIndex = 11;
-            this.label2.Text = "LeftClick => Level";
+            this.label2.Text = "LeftClick => Level Block";
             // 
-            // label3
+            // BtnSpecial
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(362, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "RightClick => StartPoint";
+            this.BtnSpecial.Location = new System.Drawing.Point(455, 9);
+            this.BtnSpecial.Name = "BtnSpecial";
+            this.BtnSpecial.Size = new System.Drawing.Size(84, 23);
+            this.BtnSpecial.TabIndex = 12;
+            this.BtnSpecial.Text = "Write Special";
+            this.BtnSpecial.UseVisualStyleBackColor = true;
+            this.BtnSpecial.Click += new System.EventHandler(this.BtnSpecial_Click);
             // 
             // Form1
             // 
@@ -138,17 +139,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1057, 573);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.BtnSpecial);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnReset);
-            this.Controls.Add(this.BtnWrite);
+            this.Controls.Add(this.BtnWriteLevels);
             this.Controls.Add(this.txtPath);
             this.Controls.Add(this.PbPic);
             this.Controls.Add(this.NudBlockSize);
             this.Controls.Add(this.btnOpenPic);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Mapping";
             ((System.ComponentModel.ISupportInitialize)(this.NudBlockSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbPic)).EndInit();
             this.ResumeLayout(false);
@@ -163,11 +165,11 @@
         private System.Windows.Forms.NumericUpDown NudBlockSize;
         private System.Windows.Forms.PictureBox PbPic;
         private System.Windows.Forms.TextBox txtPath;
-        private System.Windows.Forms.Button BtnWrite;
+        private System.Windows.Forms.Button BtnWriteLevels;
         private System.Windows.Forms.Button BtnReset;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BtnSpecial;
     }
 }
 
